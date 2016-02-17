@@ -1,5 +1,20 @@
-.gradle
+target
 build/
+out
+*.DS_Store
+*~
+.gradle
+*.iml
+*.ipr
+*.iws
+.idea
+.*.swp
+*.class
+/bin
+user.gradle
+/.settings
+*.classpath
+*.project
 
 # Ignore Gradle GUI config
 gradle-app.setting
