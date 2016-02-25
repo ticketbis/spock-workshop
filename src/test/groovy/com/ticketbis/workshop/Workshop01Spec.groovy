@@ -62,9 +62,7 @@ class Workshop01Spec extends Specification {
         illegalArgumentException.message == "Not valid arguments"
 
         where:
-        base | height
-        -1   | 3
-        2    | 0
-        null | 4
+        base << [-1, 2, null]
+        height << [3, 0, 4]
     }
 }
