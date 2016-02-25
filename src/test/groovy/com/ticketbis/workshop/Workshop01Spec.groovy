@@ -1,5 +1,6 @@
 package com.ticketbis.workshop
 
+import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,6 +12,7 @@ import spock.lang.Unroll
  */
 class Workshop01Spec extends Specification {
 
+    @Shared
     def exercises = new Exercises()
 
     /**
