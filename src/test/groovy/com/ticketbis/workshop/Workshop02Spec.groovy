@@ -5,6 +5,9 @@ import com.ticketbis.workshop.library.Book
 import com.ticketbis.workshop.library.Library
 import spock.lang.Specification
 
+import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
+import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
+
 /**
  * These are the second set of exercises for the Spock workshop. All you need
  * to do is write some feature methods to verify the behaviour of the methods
@@ -13,7 +16,7 @@ import spock.lang.Specification
  */
 class Workshop02Spec extends Specification {
 
-    def "When I register a book in the library it should be available"() {
+    def "When I register a book it should be available"() {
         given: "a library"
         Library library = new Library()
 
@@ -21,13 +24,28 @@ class Workshop02Spec extends Specification {
         Book book = new Book()
 
         when: "adding a book to a library"
-        library.registerBook(book)
+        library.register(book)
 
         then: "library has one book available"
-        library.books.first().status == Book.Status.AVAILABLE
+        library.books.first().status == AVAILABLE
     }
 
-    //TODO: reservar libro y ver que cambia el estado
+    def "when I borrow a book it should be unavailable"() {
+        given: "a library"
+        Library library = new Library()
+
+        and: "a book registered in the library"
+        Book book = new Book(ISBN: "123", status: AVAILABLE)
+        library.books << book
+
+        when: "I borrow a book"
+        Book borrowedBook = library.borrow(book)
+
+        then: "a book should be unavailable"
+        library.books.contains(borrowedBook)
+        borrowedBook.status == UNAVAILABLE
+    }
+
     //TODO: ver que no se puede reservar un libro en estado unavailable
     //TODO: cargar una lista de libros de un fichero
 

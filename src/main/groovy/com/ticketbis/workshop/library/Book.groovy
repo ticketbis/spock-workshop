@@ -9,6 +9,7 @@ class Book {
     Status status
 
     static enum Status {
-        AVAILABLE
+        AVAILABLE,
+        UNAVAILABLE
     }
 }
