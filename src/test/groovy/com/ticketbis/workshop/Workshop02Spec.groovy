@@ -16,11 +16,14 @@ import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
  */
 class Workshop02Spec extends Specification {
 
-    def "When I register a book it should be available"() {
-        given: "a library"
-        Library library = new Library()
+    Library library
 
-        and: "a book"
+    def setup() {
+        library = new Library()
+    }
+
+    def "When I register a book it should be available"() {
+        given: "a book"
         Book book = new Book()
 
         when: "adding a book to a library"
@@ -30,11 +33,9 @@ class Workshop02Spec extends Specification {
         library.books.first().status == AVAILABLE
     }
 
-    def "when I borrow a book it should be unavailable"() {
-        given: "a library"
-        Library library = new Library()
 
-        and: "a book registered in the library"
+    def "when I borrow a book it should be unavailable"() {
+        given: "a book registered in the library"
         Book book = new Book(ISBN: "123", status: AVAILABLE)
         library.books << book
 
@@ -46,7 +47,18 @@ class Workshop02Spec extends Specification {
         borrowedBook.status == UNAVAILABLE
     }
 
-    //TODO: ver que no se puede reservar un libro en estado unavailable
+    def "when I try to borrow an unavailable book it will throw an exception"() {
+        given: "a book registered in the library"
+        Book book = new Book(ISBN: "123", status: UNAVAILABLE)
+        library.books << book
+
+        when: "I borrow a book"
+        library.borrow(book)
+
+        then: "a book should be unavailable"
+        thrown UnsupportedOperationException
+    }
+
     //TODO: cargar una lista de libros de un fichero
 
 }

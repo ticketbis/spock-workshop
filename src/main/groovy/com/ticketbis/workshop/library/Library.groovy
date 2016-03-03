@@ -14,6 +14,11 @@ class Library {
 
     Book borrow(Book book) {
         Book borrowedBook = books.find { it.ISBN == book.ISBN }
+
+        if (borrowedBook.status != AVAILABLE) {
+            throw new UnsupportedOperationException()
+        }
+
         borrowedBook.status = UNAVAILABLE
         borrowedBook
     }
