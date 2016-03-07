@@ -1,0 +1,24 @@
+{
+  "books": [
+    {
+      "title": "Effective java",
+      "author": "Joshua Bloch",
+      "isbn": "0321356683"
+    },
+    {
+      "title": "The effective engineer",
+      "author": "Edmond Lau",
+      "isbn": "780996128100"
+    },
+    {
+      "title": "The Caves of Steel",
+      "author": "Isaac Asimov",
+      "isbn": "9788804403043"
+    },
+    {
+      "title": "The Martian",
+      "author": "Andy Weir",
+      "isbn": "9781410469571"
+    }
+  ]
+}
