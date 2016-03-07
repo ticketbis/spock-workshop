@@ -3,8 +3,8 @@ package com.ticketbis.workshop.library
 
 class Book {
 
-    String ISBN
-    String name
+    String isbn
+    String title
     String author
     Status status
 

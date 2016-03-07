@@ -1,8 +1,9 @@
 package com.ticketbis.workshop
 
 import com.ticketbis.workshop.library.Book
-
+import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
+import groovy.json.JsonSlurper
 import spock.lang.Specification
 
 import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
@@ -36,7 +37,7 @@ class Workshop02Spec extends Specification {
 
     def "when I borrow a book it should be unavailable"() {
         given: "a book registered in the library"
-        Book book = new Book(ISBN: "123", status: AVAILABLE)
+        Book book = new Book(isbn: "123", status: AVAILABLE)
         library.books << book
 
         when: "I borrow a book"
@@ -49,7 +50,7 @@ class Workshop02Spec extends Specification {
 
     def "when I try to borrow an unavailable book it will throw an exception"() {
         given: "a book registered in the library"
-        Book book = new Book(ISBN: "123", status: UNAVAILABLE)
+        Book book = new Book(isbn: "123", status: UNAVAILABLE)
         library.books << book
 
         when: "I borrow a book"
@@ -59,6 +60,22 @@ class Workshop02Spec extends Specification {
         thrown UnsupportedOperationException
     }
 
+    def "should load a list of books using a file" () {
+        given: "a book loader"
+        BookLoader bookLoader = new BookLoader(library)
+
+        and: "a list of books"
+        def books = new JsonSlurper().parse(this.getClass().getClassLoader().getResource("books.json"))
+
+        when: "a list of books is loaded"
+        bookLoader.register(books)
+
+        then: "the library should have all the books registered"
+        library.books.size() == old(library.books.size()) + 4
+
+    }
+
     //TODO: cargar una lista de libros de un fichero
+    //TODO: cargar una nueva lista de libros obviando los repetidos
 
 }
