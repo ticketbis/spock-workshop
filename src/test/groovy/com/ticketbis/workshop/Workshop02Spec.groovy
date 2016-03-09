@@ -4,20 +4,32 @@ import com.ticketbis.workshop.library.Book
 import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
 import groovy.json.JsonSlurper
+import spock.lang.Shared
 import spock.lang.Specification
 
 import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
 import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
 
 /**
- * These are the second set of exercises for the Spock workshop. All you need
+ * Second set of exercises for the Spock workshop. All you need
  * to do is write some feature methods to verify the behaviour of the methods
- * in the {@link Exercises} class. No mocking is required, but you will need
- * to handle exceptions and multiple data sets.
+ * in {@link Library} and {@link BookLoader} classes. No mocking is required, but you will need
+ * to use setup and setupSpec methods.
+ *
+ *
+ * Also you will need to use the provide resource books.json file.
  */
 class Workshop02Spec extends Specification {
 
     Library library
+
+    @Shared
+    def books
+
+    def setupSpec() {
+        URL booksResource = this.getClass().getClassLoader().getResource("books.json")
+        books = getBookList(booksResource)
+    }
 
     def setup() {
         library = new Library()
@@ -64,18 +76,31 @@ class Workshop02Spec extends Specification {
         given: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
 
-        and: "a list of books"
-        def books = new JsonSlurper().parse(this.getClass().getClassLoader().getResource("books.json"))
-
         when: "a list of books is loaded"
         bookLoader.register(books)
 
         then: "the library should have all the books registered"
         library.books.size() == old(library.books.size()) + 4
-
     }
 
-    //TODO: cargar una lista de libros de un fichero
-    //TODO: cargar una nueva lista de libros obviando los repetidos
+    def "should load a list of books using a file adding only the new ones" () {
+        given: "a book loader"
+        BookLoader bookLoader = new BookLoader(library)
+
+        and: "a book that is in the file is previously registered"
+        def repeatedBook = new Book(title: "Other title", author: "Joshua Bloch", isbn: "0321356683")
+        library.register(repeatedBook)
+
+        when: "a list of books is loaded"
+        bookLoader.register(books)
+
+        then: "the library should register only not repeated books"
+        library.books.size() == old(library.books.size()) + 3
+        repeatedBook in library.books
+    }
+
+    private getBookList(URL booksResource) {
+        new JsonSlurper().parse(booksResource).books
+    }
 
 }

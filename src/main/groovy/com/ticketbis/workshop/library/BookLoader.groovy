@@ -8,14 +8,18 @@ class BookLoader {
         this.library = library
     }
 
-    def register(def json) {
-
-        return json.books.collect { book ->
-            library.register(new Book(
-                    title: book.title,
-                    author: book.author,
-                    isbn: book.isbn))
+    def register(def books) {
+        books.collect { book ->
+            if (isNotRegistered(book)) {
+                library.register(new Book(
+                        title: book.title,
+                        author: book.author,
+                        isbn: book.isbn))
+            }
         }
     }
 
+    private boolean isNotRegistered(book) {
+        !library.books.find { it.isbn == book.isbn }
+    }
 }
