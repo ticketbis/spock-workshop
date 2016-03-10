@@ -35,6 +35,10 @@ class Workshop02Spec extends Specification {
         library = new Library()
     }
 
+    /**
+     * <p>TODO Write a feature method for {@link Library#register(Book)}
+     * in order to check that when we register a book it would be available to borrow.</p>
+     */
     def "When I register a book it should be available"() {
         given: "a book"
         Book book = new Book()
@@ -46,7 +50,10 @@ class Workshop02Spec extends Specification {
         library.books.first().status == AVAILABLE
     }
 
-
+    /**
+     * <p>TODO Write a feature method for {@link Library#borrow(Book)}
+     * in order to check that when we borrow a book it would be unavailable to borrow.</p>
+     */
     def "when I borrow a book it should be unavailable"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: AVAILABLE)
@@ -60,6 +67,11 @@ class Workshop02Spec extends Specification {
         borrowedBook.status == UNAVAILABLE
     }
 
+    /**
+     * <p>TODO Write a feature method for {@link Library#borrow(Book)}
+     * in order to check that when we try to borrow an unavailable book it would throw
+     * an UnsupportedOperationException.</p>
+     */
     def "when I try to borrow an unavailable book it will throw an exception"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: UNAVAILABLE)
@@ -72,6 +84,12 @@ class Workshop02Spec extends Specification {
         thrown UnsupportedOperationException
     }
 
+    /**
+     * <p>TODO Write a feature method for {@link BookLoader#register(Book)}
+     * in order to check that when we load a given list of books all of them are registered.</p>
+     *
+     * <p>You will need to use the provide resource books.json file.</p>
+     */
     def "should load a list of books using a file" () {
         given: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
@@ -83,6 +101,13 @@ class Workshop02Spec extends Specification {
         library.books.size() == old(library.books.size()) + 4
     }
 
+    /**
+     * <p>TODO Write a feature method for {@link BookLoader#register(Book)}
+     * in order to check that when we load a given list of books and one of them is already
+     * registered in the library, all the books would be registered except the repeated one.</p>
+     *
+     * <p>You will need to use the provide resource books.json file.</p>
+     */
     def "should load a list of books using a file adding only the new ones" () {
         given: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
