@@ -54,7 +54,7 @@ class Workshop02Spec extends Specification {
      * <p>TODO Write a feature method for {@link Library#borrow(Book)}
      * in order to check that when we borrow a book it would be unavailable to borrow.</p>
      */
-    def "when I borrow a book it should be unavailable"() {
+    def "When I borrow a book it should be unavailable"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: AVAILABLE)
         library.books << book
@@ -72,7 +72,7 @@ class Workshop02Spec extends Specification {
      * in order to check that when we try to borrow an unavailable book it would throw
      * an UnsupportedOperationException.</p>
      */
-    def "when I try to borrow an unavailable book it will throw an exception"() {
+    def "When I try to borrow an unavailable book it will throw an exception"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: UNAVAILABLE)
         library.books << book
@@ -90,7 +90,7 @@ class Workshop02Spec extends Specification {
      *
      * <p>You will need to use the provide resource books.json file.</p>
      */
-    def "should load a list of books using a file" () {
+    def "Should load a list of books using a file" () {
         given: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
 
@@ -108,7 +108,7 @@ class Workshop02Spec extends Specification {
      *
      * <p>You will need to use the provide resource books.json file.</p>
      */
-    def "should load a list of books using a file adding only the new ones" () {
+    def "Should load a list of books using a file adding only the new ones" () {
         given: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
 

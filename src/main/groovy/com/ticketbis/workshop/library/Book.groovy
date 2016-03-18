@@ -7,6 +7,7 @@ class Book {
     String title
     String author
     Status status
+    String dateCreated
 
     static enum Status {
         AVAILABLE,

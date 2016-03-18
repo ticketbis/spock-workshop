@@ -1,11 +1,14 @@
 package com.ticketbis.workshop.library
 
+import java.sql.Time
+
 import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
 import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
 
 class Library {
 
     List<Book> books = []
+    TimeService timeService = new TimeService()
 
     def register(Book book) {
         book.status = AVAILABLE
@@ -23,4 +26,8 @@ class Library {
         borrowedBook
     }
 
+    Book setTime(Book book) {
+        book.dateCreated = timeService.getNow()
+        book
+    }
 }
