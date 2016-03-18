@@ -1,7 +1,5 @@
 package com.ticketbis.workshop.library
 
-import java.sql.Time
-
 import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
 import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
 

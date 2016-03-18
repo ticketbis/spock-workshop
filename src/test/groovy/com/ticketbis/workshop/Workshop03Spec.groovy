@@ -34,19 +34,8 @@ class Workshop03Spec extends Specification {
      *
      * <p>You will need to use the provide resource books.json file.</p>
      */
-    def "Should load in the library a list of books, using a file"() {
-        given: "a mocked library"
-        Library library = Mock()
 
-        and: "a book loader"
-        BookLoader bookLoader = new BookLoader(library)
 
-        when: "a list of books is loaded"
-        bookLoader.register(books)
-
-        then: "the library should have all the books registered"
-        4 * library.register(_ as Book)
-    }
     /**
      * <p>TODO Write a feature method for {@link Library#setTime(Book)}
      * in order to check that when we set a time for a given book, the book creation
@@ -54,22 +43,7 @@ class Workshop03Spec extends Specification {
      *
      * NOTE: You will need to Stub {@link TimeService#getNow()}
      */
-    def "Should update book creation date when we set its time on the library"() {
-        given: "a book"
-        Book book = new Book()
 
-        and: "a library with a stubbed getNow method"
-        TimeService timeService = Stub(TimeService) {
-            getNow() >> "Now"
-        }
-        Library library = new Library(timeService: timeService)
-
-        when:
-        library.setTime(book)
-
-        then:
-        book.dateCreated == "Now"
-    }
 
     private getBookList(URL booksResource) {
         new JsonSlurper().parse(booksResource).books
