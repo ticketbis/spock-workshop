@@ -1,5 +1,6 @@
 package com.ticketbis.workshop
 
+
 class Exercises {
 
     double calculateTriangleArea(Double base, Double height) {

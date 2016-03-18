@@ -4,11 +4,8 @@ import com.ticketbis.workshop.library.Book
 import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
 import groovy.json.JsonSlurper
-import spock.lang.Shared
 import spock.lang.Specification
 
-import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
-import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
 
 /**
  * Second set of exercises for the Spock workshop. All you need

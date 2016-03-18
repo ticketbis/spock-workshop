@@ -48,4 +48,5 @@ class Workshop03Spec extends Specification {
     private getBookList(URL booksResource) {
         new JsonSlurper().parse(booksResource).books
     }
+
 }

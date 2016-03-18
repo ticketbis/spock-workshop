@@ -7,4 +7,5 @@ class TimeService {
         def url = "http://www.timeapi.org/utc/now".toURL()
         url.text
     }
+
 }

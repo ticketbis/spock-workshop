@@ -13,4 +13,5 @@ class Book {
         AVAILABLE,
         UNAVAILABLE
     }
+
 }

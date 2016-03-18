@@ -1,5 +1,6 @@
 package com.ticketbis.workshop.library
 
+
 class BookLoader {
 
     Library library
@@ -22,4 +23,5 @@ class BookLoader {
     private boolean isNotRegistered(book) {
         !library.books.find { it.isbn == book.isbn }
     }
+
 }
