@@ -7,6 +7,7 @@ import groovy.json.JsonSlurper
 import spock.lang.Specification
 
 
+
 /**
  * Second set of exercises for the Spock workshop. All you need
  * to do is write some feature methods to verify the behaviour of the methods
