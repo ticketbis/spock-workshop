@@ -15,6 +15,17 @@ There already is working code in [/src/main/](https://github.com/ticketbis/spock
 
 Each *TODO* task should be solved using only one feature method, but feel free to do it your way.
 
+### Run the tests with Gradle
+```./gradlew test```
+
+### Run the tests with IntelliJ IDEA
+First of all, import the project in IntelliJ:
+* File > New > Project from Existing Sources...
+* Select the **build.gradle** file.
+* Select *Use default gradle wrapper* in the import process and an existing java version.
+
+Finally, you can select a specific test file or a package and **Secondary click > Run [file|Tests in package]**.
+
 ## Solutions
 You will find our solutions proposal in the [Solutions](https://github.com/ticketbis/spock-workshop/tree/solutions) branch.
 
