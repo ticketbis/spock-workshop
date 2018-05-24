@@ -1,6 +1,8 @@
 package com.ticketbis.workshop.library
 
+import groovy.transform.CompileStatic
 
+@CompileStatic
 class TimeService {
 
     String getNow() {

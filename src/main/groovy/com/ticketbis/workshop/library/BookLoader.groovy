@@ -1,6 +1,8 @@
 package com.ticketbis.workshop.library
 
+import groovy.transform.CompileStatic
 
+@CompileStatic
 class BookLoader {
 
     Library library
@@ -9,7 +11,7 @@ class BookLoader {
         this.library = library
     }
 
-    def register(def books) {
+    def register(List<Book> books) {
         books.collect { book ->
             if (isNotRegistered(book)) {
                 library.register(new Book(
@@ -20,7 +22,7 @@ class BookLoader {
         }
     }
 
-    private boolean isNotRegistered(book) {
+    private boolean isNotRegistered(Book book) {
         !library.books.find { it.isbn == book.isbn }
     }
 
