@@ -14,6 +14,11 @@ class Library {
         books << book
     }
 
+    Library leftShift(final Book book) {
+        books << book
+        this
+    }
+
     Book borrow(Book book) {
         Book borrowedBook = books.find { it.isbn == book.isbn }
 
