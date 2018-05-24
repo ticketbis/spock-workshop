@@ -58,7 +58,7 @@ class Workshop02Spec extends Specification {
     def "When I borrow a book it should be unavailable"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: AVAILABLE)
-        library.books << book
+        library << book
 
         when: "I borrow a book"
         Book borrowedBook = library.borrow(book)
@@ -76,7 +76,7 @@ class Workshop02Spec extends Specification {
     def "When I try to borrow an unavailable book it will throw an exception"() {
         given: "a book registered in the library"
         Book book = new Book(isbn: "123", status: UNAVAILABLE)
-        library.books << book
+        library << book
 
         when: "I borrow a book"
         library.borrow(book)
