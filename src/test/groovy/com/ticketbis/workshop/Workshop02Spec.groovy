@@ -4,6 +4,8 @@ import com.ticketbis.workshop.library.Book
 import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
 import groovy.json.JsonSlurper
+import groovy.json.internal.LazyMap
+import spock.lang.Shared
 import spock.lang.Specification
 
 
@@ -17,7 +19,21 @@ import spock.lang.Specification
  * Also you will need to use the provide resource books.json file.
  */
 class Workshop02Spec extends Specification {
-    
+
+    Library library
+
+    @Shared
+    List<Book> books
+
+    def setupSpec() {
+        URL booksResource = this.getClass().getClassLoader().getResource("books.json")
+        books = getBookList(booksResource)
+    }
+
+    def setup() {
+        library = new Library()
+    }
+
     /**
      * <p>TODO Write a feature method for {@link Library#register(Book)}
      * in order to check that when we register a book it would be available to borrow.</p>
@@ -53,10 +69,9 @@ class Workshop02Spec extends Specification {
      * <p>You will need to use the provide resource books.json file.</p>
      */
 
-
-    private getBookList() {
+    private List<Book> getBookList() {
         URL booksResource = this.getClass().getClassLoader().getResource("books.json")
-        new JsonSlurper().parse(booksResource).books
+        new JsonSlurper().parse(booksResource).books.collect { LazyMap lM -> lM as Book }
     }
 
 }
