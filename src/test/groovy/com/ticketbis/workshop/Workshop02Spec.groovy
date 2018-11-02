@@ -4,6 +4,7 @@ import com.ticketbis.workshop.library.Book
 import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
 import groovy.json.JsonSlurper
+import groovy.json.internal.LazyMap
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -25,7 +26,7 @@ class Workshop02Spec extends Specification {
     Library library
 
     @Shared
-    def books
+    List<Book> books
 
     def setupSpec() {
         URL booksResource = this.getClass().getClassLoader().getResource("books.json")
@@ -125,8 +126,8 @@ class Workshop02Spec extends Specification {
         repeatedBook in library.books
     }
 
-    private getBookList(URL booksResource) {
-        new JsonSlurper().parse(booksResource).books
+    private  List<Book> getBookList(URL booksResource) {
+        new JsonSlurper().parse(booksResource).books.collect { LazyMap lM -> lM as Book }
     }
 
 }
