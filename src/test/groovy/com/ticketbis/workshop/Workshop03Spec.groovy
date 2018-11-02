@@ -37,7 +37,9 @@ class Workshop03Spec extends Specification {
      */
     def "Should load in the library a list of books, using a file"() {
         given: "a mocked library"
-        Library library = Mock()
+        Library library = Mock() {
+            _ * getBooks() >> []
+        }
 
         and: "a book loader"
         BookLoader bookLoader = new BookLoader(library)
