@@ -11,7 +11,7 @@ import spock.lang.Specification
  */
 class Workshop01Spec extends Specification {
 
-    def exercises = new Exercises()
+    Exercises exercises = new Exercises()
 
     /**
      * <p>TODO Write a feature method for {@link Exercises#calculateTriangleArea(Double, Double)}

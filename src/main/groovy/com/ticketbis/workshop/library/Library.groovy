@@ -2,8 +2,9 @@ package com.ticketbis.workshop.library
 
 import static com.ticketbis.workshop.library.Book.Status.AVAILABLE
 import static com.ticketbis.workshop.library.Book.Status.UNAVAILABLE
+import groovy.transform.CompileStatic
 
-
+@CompileStatic
 class Library {
 
     List<Book> books = []
@@ -12,6 +13,11 @@ class Library {
     def register(Book book) {
         book.status = AVAILABLE
         books << book
+    }
+
+    Library leftShift(final Book book) {
+        books << book
+        this
     }
 
     Book borrow(Book book) {
