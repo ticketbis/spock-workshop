@@ -1,6 +1,8 @@
 package com.ticketbis.workshop
 
+import groovy.transform.CompileStatic
 
+@CompileStatic
 class Exercises {
 
     double calculateTriangleArea(Double base, Double height) {

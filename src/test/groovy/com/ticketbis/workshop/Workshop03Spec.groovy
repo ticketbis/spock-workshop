@@ -5,6 +5,7 @@ import com.ticketbis.workshop.library.BookLoader
 import com.ticketbis.workshop.library.Library
 import com.ticketbis.workshop.library.TimeService
 import groovy.json.JsonSlurper
+import groovy.json.internal.LazyMap
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -20,7 +21,7 @@ import spock.lang.Specification
 class Workshop03Spec extends Specification {
 
     @Shared
-    def books
+    List<Book> books
 
     def setupSpec() {
         URL booksResource = this.getClass().getClassLoader().getResource("books.json")
@@ -34,7 +35,21 @@ class Workshop03Spec extends Specification {
      *
      * <p>You will need to use the provide resource books.json file.</p>
      */
+    def "Should load in the library a list of books, using a file"() {
+        given: "a mocked library"
+        Library library = Mock() {
+            _ * getBooks() >> []
+        }
 
+        and: "a book loader"
+        BookLoader bookLoader = new BookLoader(library)
+
+        when: "a list of books is loaded"
+        bookLoader.register(books)
+
+        then: "the library should have all the books registered"
+        4 * library.register(_ as Book)
+    }
 
     /**
      * <p>TODO Write a feature method for {@link Library#setTime(Book)}
@@ -43,10 +58,25 @@ class Workshop03Spec extends Specification {
      *
      * NOTE: You will need to Stub {@link TimeService#getNow()}
      */
+    def "Should update book creation date when we set its time on the library"() {
+        given: "a book"
+        Book book = new Book()
 
+        and: "a library with a stubbed getNow method"
+        TimeService timeService = Stub(TimeService) {
+            getNow() >> "Now"
+        }
+        Library library = new Library(timeService: timeService)
 
-    private getBookList(URL booksResource) {
-        new JsonSlurper().parse(booksResource).books
+        when:
+        library.setTime(book)
+
+        then:
+        book.dateCreated == "Now"
+    }
+
+    private List<Book> getBookList(URL booksResource) {
+        new JsonSlurper().parse(booksResource).books.collect { LazyMap lM -> lM as Book }
     }
 
 }
